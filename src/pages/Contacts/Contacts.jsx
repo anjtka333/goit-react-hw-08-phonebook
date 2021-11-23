@@ -6,6 +6,8 @@ import { getContacts } from "../../redux/contacts/contactsOperations";
 import { putFilter } from "../../redux/contacts/contactsActions";
 import { getError, getisLoading } from "../../redux/selectors/selectors";
 import Filter from "../../components/Filter/Filter";
+import authOperations from "../../redux/auth/auth-operations";
+import { getContactsApi } from "../../service/api";
 
 const Contacts = () => {
   const dispatch = useDispatch();
@@ -16,6 +18,8 @@ const Contacts = () => {
   };
 
   useEffect(() => {
+    // authOperations.fetchCurrentUser();
+    // getContactsApi();
     dispatch(getContacts());
   }, []);
   return (

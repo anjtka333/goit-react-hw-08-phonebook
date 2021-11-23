@@ -1,25 +1,41 @@
-// import { useEffect } from "react";
-// import ContactForm from "./components/ContactForm/ContactForm";
-// import ContactList from "./components/ContactList/ContactList";
-// import Filter from "./components/Filter/Filter";
-// import s from "./components/ContactForm/ContactForm.module.scss";
-// import { useDispatch, useSelector } from "react-redux";
-// import { putFilter } from "./redux/contacts/contactsActions";
-// import { getContacts } from "./redux/contacts/contactsOperations";
-// import { getError, getisLoading } from "./redux/selectors/selectors";
 import { Route, Switch, NavLink, Redirect } from "react-router-dom";
+import UserMenu from "./components/UserMenu/UserMenu";
 import Contacts from "./pages/Contacts/Contacts";
 import Login from "./pages/Login/Login";
 import Register from "./pages/Register/Register";
+import { useDispatch, useSelector } from "react-redux";
+import authSelectors from "./redux/auth/auth-selectors";
+import authOperations from "./redux/auth/auth-operations";
+import { useEffect } from "react";
+import Navigation from "./components/Navigation/Navigation";
+import Routes from "./Routes";
 
 const App = () => {
+  // const isLoggedIn = useSelector(authSelectors.getIsLoggedIn);
+  const dispatch = useDispatch();
+  const token = useSelector((state) => state.auth.token);
+  useEffect(() => {
+    if (token) dispatch(authOperations.fetchCurrentUser());
+  }, [token, dispatch]);
   return (
     <div className="App">
-      <nav>
-        <NavLink to="/login">Login </NavLink>
-        <NavLink to="/register">Register </NavLink>
-      </nav>
-      <Switch>
+      <Navigation />
+      <Routes />
+      {/* {isLoggedIn ? (
+        <UserMenu />
+      ) : (
+        <nav>
+          <ul>
+            <li>
+              <NavLink to="/login">Login </NavLink>
+            </li>
+            <li>
+              <NavLink to="/register">Register </NavLink>
+            </li>
+          </ul>
+        </nav>
+      )} */}
+      {/* <Switch>
         <Route path="/login">
           <Login />
         </Route>
@@ -29,7 +45,7 @@ const App = () => {
         <Route path="/contacts">
           <Contacts />
         </Route>
-      </Switch>
+      </Switch> */}
     </div>
   );
 };

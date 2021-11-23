@@ -10,6 +10,7 @@ const ContactList = () => {
   return (
     <ul className={s.ulStyle}>
       {filtered.map((item) => {
+        console.log(item);
         return (
           <li key={item.id}>
             {item.name} {item.number}

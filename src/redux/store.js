@@ -12,24 +12,24 @@ import {
   REGISTER,
 } from "redux-persist";
 import storage from "redux-persist/lib/storage";
+import authReducer from "./auth/auth-slice";
+
+const persistConfig = {
+  key: "auth",
+  storage,
+  whitelist: ["token"],
+};
+const persistedReducer = persistReducer(persistConfig, authReducer);
 
 const rootReducer = combineReducers({
   contacts: reducerContacts,
   loader: loaderReducer,
   error: errorReduccer,
+  auth: persistedReducer,
 });
 
-const persistConfig = {
-  key: "root",
-  version: 1,
-  storage,
-  whitelist: ["contacts"],
-};
-
-const persistedReducer = persistReducer(persistConfig, rootReducer);
-
 const store = configureStore({
-  reducer: persistedReducer,
+  reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: {
