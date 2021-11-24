@@ -1,8 +1,12 @@
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { useHistory } from "react-router";
 import authOperations from "../../redux/auth/auth-operations";
-import { getContactsApi } from "../../service/api";
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Input from "@mui/material/Input";
+import Button from "@mui/material/Button";
+
+// const ariaLabel = { "aria-label": "description" };
 
 const EnterForm = ({ isLogin }) => {
   const [name, setName] = useState("");
@@ -22,7 +26,6 @@ const EnterForm = ({ isLogin }) => {
         break;
     }
   };
-  const history = useHistory();
   const dispatch = useDispatch();
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -31,17 +34,20 @@ const EnterForm = ({ isLogin }) => {
     } else {
       dispatch(authOperations.register({ name, email, password }));
     }
-    // authOperations.fetchCurrentUser();
-    history.push("/contacts");
-    // getContactsApi();
   };
 
   return (
     <form onSubmit={handleSubmit}>
       {!isLogin && (
         <>
+          <Box
+            // component="form"
+            sx={{ width: "100%" }}
+            noValidate
+            autoComplete="on"
+          ></Box>
           <label htmlFor="nameInput">Name </label>
-          <input
+          <Input
             type="text"
             name="name"
             value={name}
@@ -54,7 +60,7 @@ const EnterForm = ({ isLogin }) => {
         </>
       )}
       <label htmlFor="emailInput">Email </label>
-      <input
+      <Input
         type="email"
         name="email"
         value={email}
@@ -63,7 +69,7 @@ const EnterForm = ({ isLogin }) => {
         onChange={handleSetName}
       />
       <label htmlFor="passwordInput">Password </label>
-      <input
+      <Input
         type="password"
         name="password"
         required
@@ -71,7 +77,9 @@ const EnterForm = ({ isLogin }) => {
         value={password}
         onChange={handleSetName}
       />
-      <button type="submit">Register</button>
+      <Button variant="text" type="submit">
+        Register
+      </Button>
     </form>
   );
 };
