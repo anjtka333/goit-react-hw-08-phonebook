@@ -1,8 +1,8 @@
 import { useDispatch, useSelector } from "react-redux";
 import { putFilter } from "../../redux/contacts/contactsActions";
 import { getFilterFromState } from "../../redux/selectors/selectors";
-
-const Filter = ({ inputStyle }) => {
+import s from "./Filter.module.scss";
+const Filter = () => {
   const value = useSelector(getFilterFromState);
   const dispatch = useDispatch();
   const handleFilterChange = (e) => {
@@ -15,7 +15,7 @@ const Filter = ({ inputStyle }) => {
         name="filter"
         value={value}
         onChange={handleFilterChange}
-        className={inputStyle}
+        className={s.input}
       />
     </label>
   );

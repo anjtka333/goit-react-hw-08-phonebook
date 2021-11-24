@@ -18,8 +18,6 @@ const Contacts = () => {
   };
 
   useEffect(() => {
-    // authOperations.fetchCurrentUser();
-    // getContactsApi();
     dispatch(getContacts());
   }, []);
   return (

@@ -1,4 +1,3 @@
-import axios from "axios";
 import {
   addContactsError,
   addContactsRequest,
@@ -15,7 +14,6 @@ import {
   getContactsApi,
   removeContactsApi,
 } from "../../service/api";
-import { createAsyncThunk } from "@reduxjs/toolkit";
 
 export const addContact = (contact) => (dispatch) => {
   dispatch(addContactsRequest());
@@ -52,12 +50,3 @@ export const removeContacts = (id) => (dispatch) => {
     .then((idFromApi) => dispatch(removeContactsSuccess(idFromApi)))
     .catch((err) => dispatch(removeContactsError(err.message)));
 };
-
-// export const removeContactsApi = (id) => {
-//   return axios
-//     .delete(`contacts/${id}`)
-//     .then(() => id)
-//     .catch((err) => {
-//       throw err;
-//     });
-// };

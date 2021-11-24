@@ -78,7 +78,7 @@ const EnterForm = ({ isLogin }) => {
         onChange={handleSetName}
       />
       <Button variant="text" type="submit">
-        Register
+        {!isLogin ? "Register" : "Login"}
       </Button>
     </form>
   );
